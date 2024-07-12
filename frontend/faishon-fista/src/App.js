@@ -12,11 +12,15 @@ import HomeAndLiving from './components/homeAndLiving/HomeAndLiving';
 import LogIn from './components/login/LogIn';
 import WishList from './components/wishlist/WishList';
 import FilterMen from './components/filter/FilterMen';
+import { CssBaseline, Container, Box, Typography } from '@mui/material';
+import { ThemeContext } from './components/theme/ThemeContext';
+
 
 function App() {
   return (
     <Router>
       <div className="App">
+      <CssBaseline />
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,6 +31,8 @@ function App() {
           <Route path="/login" element={<LogIn />} />
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/filtermen" element={<FilterMen />} />
+          <Route path="/theme" element={<ThemeContext />} />
+
         </Routes>
         <Footer />
         <hr />
