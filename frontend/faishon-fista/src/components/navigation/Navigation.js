@@ -3,11 +3,11 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import { TextField } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import TextField from '@mui/material/TextField';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -15,16 +15,37 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import BrushIcon from '@mui/icons-material/Brush';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import { useNavigate } from 'react-router-dom';
 import Fashion from './FashionFista.png';
-import { ThemeContext } from '../theme/ThemeContext'; // Import ThemeContext
+import { ThemeContext } from '../theme/ThemeContext';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navigation = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
-  const { toggleTheme } = useContext(ThemeContext); // Use ThemeContext
+  const { toggleTheme } = useContext(ThemeContext);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [file, setFile] = useState(null);
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    // Redirect to results page with the file
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+      navigate('/results', { state: { file } });
+    }
+  };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -92,13 +113,27 @@ const Navigation = () => {
           </Box>
 
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 6 }}>
-            <input
-              type="text"
-              style={{ marginTop: '20px' }}
-              className="form-control"
-              id="exampleFormControlInput1"
-              placeholder="Search"
-            />
+            <form onSubmit={handleSearchSubmit} style={{ display: 'flex', alignItems: 'center' }}>
+              <TextField
+                type="text"
+                variant="outlined"
+                placeholder="Search"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton color="primary" component="label">
+                        <PhotoCameraIcon />
+                        <input type="file" hidden onChange={handleFileChange} />
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+                sx={{ width: 300, marginRight: 2 }}
+              />
+              <Button type="submit" variant="contained" color="primary">Search</Button>
+            </form>
 
             <div style={{ display: 'inline-block', textAlign: 'center', cursor: 'pointer' }} onClick={toggleTheme}>
               <Brightness4Icon style={{ fontSize: '40px' }} />
@@ -136,3 +171,4 @@ const Navigation = () => {
 };
 
 export default Navigation;
+

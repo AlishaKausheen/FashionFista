@@ -14,6 +14,8 @@ import WishList from './components/wishlist/WishList';
 import FilterMen from './components/filter/FilterMen';
 import { CssBaseline, Container, Box, Typography } from '@mui/material';
 import { ThemeContext } from './components/theme/ThemeContext';
+import Results from './components/results/Results';
+
 
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/filtermen" element={<FilterMen />} />
           <Route path="/theme" element={<ThemeContext />} />
+          <Route path="/results" element={<Results />} />
+
 
         </Routes>
         <Footer />
