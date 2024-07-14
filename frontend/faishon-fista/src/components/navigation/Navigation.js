@@ -1,25 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import Fashion from './FashionFista.png';
 import ThemeChanger from '../theme/ThemeChanger';
-import { TextField } from '@mui/material';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import BrushIcon from '@mui/icons-material/Brush';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import styled, { ThemeProvider } from 'styled-components';
 
 const themes = {
   light: {
-    background: '#f0f0f0',
+    background: '#fff',
     color: '#000'
   },
   dark: {
@@ -52,15 +55,15 @@ const themes = {
   },
   greenblue: {
     background: '#00CED1',
-    color: '#fff'
+    color: '#000'
   },
   greenishblue: {
     background: '#00FFFF',
-    color: '#fff'
+    color: '#000'
   },
   skyblue: {
     background: '#00BFFF',
-    color: '#fff'
+    color: '#000'
   },
   darkblue: {
     background: '#000080',
@@ -100,7 +103,27 @@ const StyledButton = styled(Button)`
 
 const Navigation = () => {
   const navigate = useNavigate();
-  const [theme, setTheme] = useState(themes.dark);
+  const [theme, setTheme] = useState(themes.light);  // Set the primary theme to light
+  const [searchTerm, setSearchTerm] = useState('');
+  const [file, setFile] = useState(null);
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    // Redirect to results page with the file
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+      navigate('/results', { state: { file } });
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -165,13 +188,27 @@ const Navigation = () => {
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 6 }}>
-              <input
-                type="text"
-                style={{ marginTop: '20px' }}
-                className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Search"
-              />
+              <form onSubmit={handleSearchSubmit} style={{ display: 'flex', alignItems: 'center' }}>
+                <TextField
+                  type="text"
+                  variant="outlined"
+                  placeholder="Search"
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton color="primary" component="label">
+                          <PhotoCameraIcon />
+                          <input type="file" hidden onChange={handleFileChange} />
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }}
+                  sx={{ width: 300, marginRight: 2 }}
+                />
+                <Button type="submit" variant="contained" color="primary">Search</Button>
+              </form>
 
               <div style={{ display: 'inline-block', textAlign: 'center', cursor: 'pointer' }}>
                 <ThemeChanger setTheme={setTheme} />

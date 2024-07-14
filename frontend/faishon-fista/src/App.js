@@ -14,6 +14,7 @@ import WishList from './components/wishlist/WishList';
 import FilterMen from './components/filter/FilterMen';
 import { CssBaseline, Container, Box, Typography } from '@mui/material';
 import { ThemeContext } from './components/theme/ThemeContext';
+import Results from './components/results/Results';
 import Story from './components/story/Story';
 import BuddyWallet from './components/buddyWallet/BuddyWallet';
 import ThemeProvider from './components/theme/ThemeContext';
@@ -35,6 +36,7 @@ function App() {
           <Route path="/login" element={<LogIn />} />
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/filtermen" element={<FilterMen />} />
+          <Route path="/results" element={<Results />} />
         </Routes>
         <Footer />
         <hr />
