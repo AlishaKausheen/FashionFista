@@ -14,6 +14,8 @@ import WishList from './components/wishlist/WishList';
 import FilterMen from './components/filter/FilterMen';
 import { CssBaseline, Container, Box, Typography } from '@mui/material';
 import { ThemeContext } from './components/theme/ThemeContext';
+import Story from './components/story/Story';
+import BuddyWallet from './components/buddyWallet/BuddyWallet';
 
 
 function App() {
@@ -22,18 +24,21 @@ function App() {
       <div className="App">
       <CssBaseline />
         <Navigation />
+        <Story/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/men" element={<MenBody />} />
           <Route path="/women" element={<WomenBody />} />
           <Route path="/kids" element={<KidsBody />} />
           <Route path="/homeandliving" element={<HomeAndLiving />} />
+          <Route path="/shoppingbuddy" element={<BuddyWallet />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/filtermen" element={<FilterMen />} />
           <Route path="/theme" element={<ThemeContext />} />
 
         </Routes>
+        
         <Footer />
         <hr />
       </div>
