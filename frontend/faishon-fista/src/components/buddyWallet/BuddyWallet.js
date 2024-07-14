@@ -16,8 +16,12 @@ const BuddyWallet = () => {
     // Fetch buddies from backend (replace with actual API call)
     setBuddies([
       { id: 1, name: 'Alisha' },
-      { id: 2, name: 'Buddy1' },
-      { id: 3, name: 'Buddy2' }
+      { id: 2, name: 'Vijaya' },
+      { id: 3, name: 'Vaishnavi' },
+      { id: 4, name: 'Astha' },
+      { id: 5, name: 'Divyanshi' },
+      { id: 6, name: 'ABc' }
+
     ]);
   }, []);
 

@@ -9,6 +9,8 @@ const WalletDetails = ({ selectedBuddy, walletDetails }) => {
       <p>Total Amount: ${walletDetails.totalAmount}</p>
       <p>Your Contribution: ${walletDetails.user1Contribution}</p>
       <p>{selectedBuddy.name}'s Contribution: ${walletDetails.user2Contribution}</p>
+      <div className='request'>Request to buddy shop <span className='add'>+</span></div>
+      <div className='chat'>Chat ^</div>
     </div>
   );
 };

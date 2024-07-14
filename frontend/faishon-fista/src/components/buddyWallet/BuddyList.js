@@ -3,6 +3,7 @@ import React from 'react';
 const BuddyList = ({ buddies, selectedBuddy, setSelectedBuddy }) => {
   return (
     <div className="buddy-list">
+      <div className='heading'>My Buddy</div>
       {buddies.map(buddy => (
         <div
           key={buddy.id}

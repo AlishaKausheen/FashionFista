@@ -5,12 +5,14 @@ body {
 .app-container {
   display: flex;
   height: 100vh;
+  background-color: rgba(213, 209, 211, 0.759);
 }
 
 .buddy-list {
   flex: 1;
   border-right: 1px solid #ddd;
   overflow-y: auto;
+  background-color: rgb(184, 23, 170);
 }
 
 .buddy-list-item {
@@ -20,20 +22,51 @@ body {
 }
 
 .buddy-list-item:hover {
-  background-color: #f0f0f0;
+  background-color: #8e0580;
+  color: #ddd;
 }
 
 .buddy-list-item.active {
-  background-color: #e0e0e0;
+  background-color: #5c065c;
+  color: #ddd;
 }
 
 .wallet-details {
-  flex: 2;
-  padding: 20px;
+  flex: 1;
+  padding: 10px;
+   border-left: 1px solid #ddd;
+   background-color: #8e0580;
+   color: #ddd;
+   width: 20%;
 }
-
+ .wallet-contributions img{
+  flex:content;
+  height:90px;
+  width: 90px;
+  margin-right: 2px;
+}
 .wallet-contributions {
   flex: 1;
   border-left: 1px solid #ddd;
   padding: 20px;
+}
+.heading{
+  color: #ddd;
+  font-weight: bolder;
+}
+.request{
+  background-color: #5c065c;
+  padding: 10px;
+}
+.add{
+  background-color: green;
+  border-radius: 50%;
+  width: 10%;
+  
+}
+.chat{
+  margin-top: 10px;
+  padding-top: 5px;
+  font-weight: bolder;
+  background-color: #5c065c;
 }
