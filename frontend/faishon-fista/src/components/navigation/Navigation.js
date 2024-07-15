@@ -1,93 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import Fashion from './FashionFista.png';
 import ThemeChanger from '../theme/ThemeChanger';
-import { TextField } from '@mui/material';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import BrushIcon from '@mui/icons-material/Brush';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import styled, { ThemeProvider } from 'styled-components';
-
-const themes = {
-  light: {
-    background: '#f0f0f0',
-    color: '#000'
-  },
-  dark: {
-    background: '#222',
-    color: '#fff'
-  },
-  red: {
-    background: '#FF0000',
-    color: '#000'
-  },
-  orange: {
-    background: '#FF4500',
-    color: '#000'
-  },
-  pink: {
-    background: '#FF69B4',
-    color: '#fff'
-  },
-  purple: {
-    background: '#8A2BE2',
-    color: '#000'
-  },
-  voilet: {
-    background: '#4B0082',
-    color: '#000'
-  },
-  blue: {
-    background: '#0000FF',
-    color: '#000'
-  },
-  greenblue: {
-    background: '#00CED1',
-    color: '#fff'
-  },
-  greenishblue: {
-    background: '#00FFFF',
-    color: '#fff'
-  },
-  skyblue: {
-    background: '#00BFFF',
-    color: '#fff'
-  },
-  darkblue: {
-    background: '#000080',
-    color: '#000'
-  },
-  lightgreen: {
-    background: '#00FF00',
-    color: '#fff'
-  },
-  green: {
-    background: '#ADFF2F',
-    color: '#000'
-  },
-  yellow: {
-    background: '#FFFF00',
-    color: '#000'
-  },
-  darkyellow: {
-    background: '#FFD700',
-    color: '#000'
-  },
-  yellowishOrange: {
-    background: '#FFA500',
-    color: '#fff'
-  },
-  custom: {}
-};
+import TryOnComponent from '../virtualtryon/TryOnComponent'; 
+import { Modal } from '@mui/material'; 
+import themes from '../theme/theme'
 
 const StyledAppBar = styled(AppBar)`
   background-color: ${props => props.theme.background} !important;
@@ -100,7 +34,37 @@ const StyledButton = styled(Button)`
 
 const Navigation = () => {
   const navigate = useNavigate();
-  const [theme, setTheme] = useState(themes.dark);
+  const [theme, setTheme] = useState(themes.light);  // Set the primary theme to light
+  const [searchTerm, setSearchTerm] = useState('');
+  const [file, setFile] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    // Redirect to results page with the file
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+      navigate('/results', { state: { file } });
+    }
+  };
+
+  const handleTryOnClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -165,16 +129,31 @@ const Navigation = () => {
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 6 }}>
-              <input
-                type="text"
-                style={{ marginTop: '20px' }}
-                className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Search"
-              />
+              <form onSubmit={handleSearchSubmit} style={{ display: 'flex', alignItems: 'center' }}>
+                <TextField
+                  type="text"
+                  variant="outlined"
+                  placeholder="Search"
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton color="primary" component="label">
+                          <PhotoCameraIcon />
+                          <input type="file" hidden onChange={handleFileChange} />
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }}
+                  sx={{ width: 300, marginRight: 2 }}
+                />
+                <Button type="submit" variant="contained" color="primary">Search</Button>
+              </form>
 
               <div style={{ display: 'inline-block', textAlign: 'center', cursor: 'pointer' }}>
                 <ThemeChanger setTheme={setTheme} />
+                <p>Themes</p>
               </div>
               <div style={{ display: 'inline-block', textAlign: 'center', cursor: 'pointer' }} onClick={() => navigate('/virtualtryon')}>
                 <VisibilityIcon style={{ fontSize: '40px' }} />
@@ -204,6 +183,28 @@ const Navigation = () => {
           </Toolbar>
         </Container>
       </StyledAppBar>
+      <Modal
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+            outline: 0
+          }}
+        >
+          <TryOnComponent onClose={handleCloseModal} />
+        </Box>
+      </Modal>
     </ThemeProvider>
   );
 };
