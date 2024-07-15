@@ -18,6 +18,8 @@ import Results from './components/results/Results';
 import Story from './components/story/Story';
 import BuddyWallet from './components/buddyWallet/BuddyWallet';
 import ThemeProvider from './components/theme/ThemeContext';
+import VirtualTryOnPage from './components/virtualtryon/VirtualTryOnPage';
+
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/filtermen" element={<FilterMen />} />
           <Route path="/results" element={<Results />} />
+          <Route path="/virtualtryon" element={<VirtualTryOnPage />} />
+
         </Routes>
         <Footer />
         <hr />

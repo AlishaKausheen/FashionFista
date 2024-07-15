@@ -1,79 +1,9 @@
 import React, { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import themes from './theme'
 import { IconButton, Button } from '@mui/material';
 import { Brightness4 as Brightness4Icon } from '@mui/icons-material';
 
-const themes = {
-  light: {
-    background: '#f0f0f0',
-    color: '#000'
-  },
-  dark: {
-    background: '#222',
-    color: '#fff'
-  },
-  red: {
-    background: '#FF0000',
-    color: '#000'
-  },
-  orange: {
-    background: '#FF4500',
-    color: '#000'
-  },
-  pink: {
-    background: '#FF69B4',
-    color: '#fff'
-  },
-  purple: {
-    background: '#8A2BE2',
-    color: '#fff'
-  },
-  voilet: {
-    background: '#4B0082',
-    color: '#fff'
-  },
-  blue: {
-    background: '#0000FF',
-    color: '#000'
-  },
-  greenblue: {
-    background: '#00CED1',
-    color: '#fff'
-  },
-  greenishblue: {
-    background: '#00FFFF',
-    color: '#fff'
-  },
-  skyblue: {
-    background: '#00BFFF',
-    color: '#fff'
-  },
-  darkblue: {
-    background: '#000080',
-    color: '#fff'
-  },
-  lightgreen: {
-    background: '#00FF00',
-    color: '#000'
-  },
-  green: {
-    background: '#ADFF2F',
-    color: '#000'
-  },
-  yellow: {
-    background: '#FFFF00',
-    color: '#000'
-  },
-  darkyellow: {
-    background: '#FFD700',
-    color: '#000'
-  },
-  yellowishOrange: {
-    background: '#FFA500',
-    color: '#fff'
-  },
-  custom: {}
-};
 
 const Container = styled.div`
   font-family: sans-serif;
@@ -143,11 +73,9 @@ const ThemeChanger = ({ setTheme }) => {
 
   return (
     <Container>
-      <Nav>
         <IconButton color="inherit" onClick={() => setShowDialog(!showDialog)}>
           <Brightness4Icon />
         </IconButton>
-      </Nav>
       <ThemeDialog show={showDialog}>
         <h3>Theme Changer</h3>
         <ThemeOptions>
