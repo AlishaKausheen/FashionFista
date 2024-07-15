@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Navigation from './components/navigation/Navigation';
@@ -13,18 +13,12 @@ import LogIn from './components/login/LogIn';
 import WishList from './components/wishlist/WishList';
 import FilterMen from './components/filter/FilterMen';
 import VirtualTryOnPage from './components/virtualtryon/VirtualTryOnPage';
-import { ThemeProvider } from 'styled-components';
-import themes from './components/theme/theme'
 
-
-
-const App = () => {
-  const [theme, setTheme] = useState(themes.light);
+function App() {
   return (
       <Router>
         <div className="App">
-        <ThemeProvider theme={theme}>
-          <Navigation setTheme={setTheme}/>
+          <Navigation />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/men" element={<MenBody />} />
@@ -35,13 +29,9 @@ const App = () => {
             <Route path="/wishlist" element={<WishList />} />
             <Route path="/filtermen" element={<FilterMen />} />
             <Route path="/virtualtryon" element={<VirtualTryOnPage />} />
-
-            
-
           </Routes>
-          <Footer setTheme={setTheme}/>
+          <Footer />
           <hr />
-          </ThemeProvider >
         </div>
       </Router>
   );
