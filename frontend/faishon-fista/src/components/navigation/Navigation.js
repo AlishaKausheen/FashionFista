@@ -23,6 +23,8 @@ import TryOnComponent from '../virtualtryon/TryOnComponent';
 import { Modal } from '@mui/material'; 
 import themes from '../theme/theme'
 
+
+
 const StyledAppBar = styled(AppBar)`
   background-color: ${props => props.theme.background} !important;
   color: ${props => props.theme.color} !important;
@@ -38,6 +40,7 @@ const Navigation = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [file, setFile] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
 
 
   const handleSearchChange = (event) => {
@@ -65,6 +68,7 @@ const Navigation = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
 
   return (
     <ThemeProvider theme={theme}>
