@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-
-
+import './/story.css'
 
 const Story = () => {
   const [imageSrc, setImageSrc] = useState('');

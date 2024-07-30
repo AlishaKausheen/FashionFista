@@ -12,12 +12,10 @@ import HomeAndLiving from './components/homeAndLiving/HomeAndLiving';
 import LogIn from './components/login/LogIn';
 import WishList from './components/wishlist/WishList';
 import FilterMen from './components/filter/FilterMen';
-import { CssBaseline, Container, Box, Typography } from '@mui/material';
-import { ThemeContext } from './components/theme/ThemeContext';
+import { CssBaseline } from '@mui/material';
 import Results from './components/results/Results';
 import Story from './components/story/Story';
 import BuddyWallet from './components/buddyWallet/BuddyWallet';
-import ThemeProvider from './components/theme/ThemeContext';
 import VirtualTryOnPage from './components/virtualtryon/VirtualTryOnPage';
 
 
@@ -40,13 +38,11 @@ function App() {
           <Route path="/filtermen" element={<FilterMen />} />
           <Route path="/results" element={<Results />} />
           <Route path="/virtualtryon" element={<VirtualTryOnPage />} />
-
         </Routes>
         <Footer />
         <hr />
       </div>
     </Router>
- </ThemeProvider>
   );
 }
 

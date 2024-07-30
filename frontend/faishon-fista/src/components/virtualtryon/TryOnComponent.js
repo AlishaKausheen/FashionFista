@@ -32,7 +32,7 @@ const TryOnComponent = () => {
             <label htmlFor="imageUpload1" className="card-img-top">
               {image1 && <img src={image1} alt="Uploaded 1" className="card-img-top" />}
               <input type="file" accept="image/*" id="imageUpload1" onChange={handleImageUpload1} style={{ display: 'none' }} />
-              <h4 className="text-center mt-2">Upload Dress Photo</h4>
+              <h4 className="text-center mt-2"><b>Upload Dress Photo</b></h4>
             </label>
           </div>
         </div>
@@ -41,7 +41,7 @@ const TryOnComponent = () => {
             <label htmlFor="imageUpload2" className="card-img-top">
               {image2 && <img src={image2} alt="Uploaded 2" className="card-img-top" />}
               <input type="file" accept="image/*" id="imageUpload2" onChange={handleImageUpload2} style={{ display: 'none' }} />
-              <h4 className="text-center mt-2">Upload Your Photo</h4>
+              <h4 className="text-center mt-2"><b>Upload Your Photo</b></h4>
             </label>
           </div>
         </div>
@@ -49,7 +49,7 @@ const TryOnComponent = () => {
           <div className="col-md-4">
             <div className="card mb-3">
               <img src={thirdImageUrl} alt="Third Image" className="card-img-top" />
-              <h4 className="text-center mt-2">Result</h4>
+              <h4 className="text-center mt-2"><b>Result</b></h4>
             </div>
           </div>
         )}

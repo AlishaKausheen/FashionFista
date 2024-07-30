@@ -29,13 +29,13 @@ const Results = () => {
   return (
     <Container>
       {file && (
-        <div>
-          <h2>Uploaded Image</h2>
-          <img src={URL.createObjectURL(file)} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
+        <div className='p-2'>
+          <h2><b>Your Drawing</b></h2>
+          <img src={URL.createObjectURL(file)} alt="Uploaded" style={{ maxWidth: '100%', height: '500px' }} />
         </div>
       )}
       <div>
-        <h2 className="p-2">Your Desired Outfits</h2>
+        <h2 className="p-2"><b>Your Desired Outfits</b></h2>
         <Grid container spacing={2}>
           {similarImages.map((image, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
