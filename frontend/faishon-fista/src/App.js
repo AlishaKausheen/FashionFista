@@ -36,13 +36,13 @@ function App() {
           <Route path="/login" element={<LogIn />} />
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/filtermen" element={<FilterMen />} />
-          <Route path="/results" element={<Results />} />
+          <Route path="/results" element={<Results/>} />
           <Route path="/virtualtryon" element={<VirtualTryOnPage />} />
         </Routes>
         <Footer />
         <hr />
       </div>
-    </Router>
+    </Router> 
   );
 }
 
